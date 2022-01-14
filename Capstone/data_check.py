@@ -13,8 +13,8 @@ def get_top_layer_folders_under_prefix(bucket_name, prefix):
     s3 = boto3.resource(
         's3',
         region_name="us-west-2",
-        aws_access_key_id='AKIAXRTRMJU3KTC2IMW7',
-        aws_secret_access_key='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'
+        aws_access_key_id='xxx',
+        aws_secret_access_key='xxxx'
     )
 
     bucket = s3.Bucket(bucket_name)
