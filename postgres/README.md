@@ -1,0 +1,53 @@
+#PROJECT SUMMARY:
+
+This project focuses on analyzing the data of a music Streaming app Sparkify.Sparkify collects the information related to songs and the activities which different users perform over their app. The analytics team is interested in understanding what songs users are listening to. Currently, they don't have an easy way to query their data, which resides in a directory of JSON logs on user activity on the app, as well as a directory with JSON metadata on the songs in their app.Their goal is to create a Postgres database with tables designed to optimize queries on song play analysis, We need to create a database schema and ETL pipeline for this analysis. 
+
+#TECHNICAL ARCHITECTURE:
+
+There are 2 kinds of datasets:
+Song Files : Each file is in JSON format and contains metadata about a song and the artist of that song.
+Log Files  : Each file is in JSON format and simulate activity logs from the app based on specified configurations.
+
+##DATABASE:                                              
+We have built a Star schema for our analysis.
+
+###Fact :
+songplays (records in log data associated with song plays)
+
+###Dimensions :
+1.users(list of users in the app)
+2.songs(list of songs in the database)
+3.artists(list of artists in the database)
+4.time(timestamps of records in songplays broken down into specific units like hour,day,week etc..)
+
+##DATA FILES
+
+1.test.ipynb :
+This file is used to test the first few rows of each table in the database.
+    
+2.create_tables.py : 
+This file drops and creates the tables. We need to run this file to reset our tables before each time we run the ETL scripts.
+
+3.etl.ipynb : 
+This ETL file reads and processes a single file from song_data and log_data and loads the data into the dimension and fact tables using Pandas library and a few Python functions.
+The notebook contains different steps to be performed from extracting the data(from the JSON files), transforming(converting a column datatype, converting an array to a list, DataFrame etc..) and  finally loading the data into these dimension tables(by importing sql_queries.py file and python functions)
+ 
+4.etl.py : 
+This ETL file reads and processes files from song_data and log_data and loads them into your tables. Here we need to list out the steps of the etl.ipynb.It is an extension of the steps that we have written in the file above.
+
+5.sql_queries.py :
+This file contains all sql queries(insert records,select etc.), and is imported into the last three files above.
+
+#PROJECT STEPS:
+
+1.Creation of Tables
+-Write CREATE statements in sql_queries.py to create each table.
+-Write DROP statements in sql_queries.py to drop each table if it exists.
+-Run create_tables.py through !python create_tables.py in the console to create the database and tables.
+-Run test.ipynb to confirm the creation of tables with the correct columns. Ensure to click "Restart kernel" to close the connection to the database after running this notebook.
+
+2.Build ETL Processes
+-Follow instructions in the etl.ipynb notebook to develop ETL processes for each table. At the end of each table section, or at the end of the notebook, run test.ipynb to confirm that records were successfully inserted into each table. Remember to rerun create_tables.py to reset these tables before each time we run this notebook.
+
+3.Build ETL Pipeline
+-Use what had been completed in etl.ipynb to complete etl.py, where we will process the entire datasets. Remember to rerun create_tables.py to reset these tables before each time we run this notebook. Run test.ipynb to confirm your records were successfully inserted into each table.
